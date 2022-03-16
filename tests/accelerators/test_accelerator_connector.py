@@ -484,7 +484,9 @@ def test_accelerator_cpu(_):
     trainer = Trainer(accelerator="cpu")
     assert isinstance(trainer.accelerator, CPUAccelerator)
 
-    with pytest.raises(MisconfigurationException, match="You requested gpu:"):
+    with pytest.raises(
+        MisconfigurationException, match="GPUAccelerator can not run on your system since GPUs are not available."
+    ):
         trainer = Trainer(accelerator="gpu", devices=1)
     with pytest.raises(
         MisconfigurationException, match="GPUAccelerator can not run on your system since GPUs are not available."
